@@ -1,9 +1,6 @@
-// src/main.js
-import foo from './foo.js';
-import $ from 'jquery';
-
-$('bidy').append('<div>dsadsa</div>')
+import 'babel-polyfill'
+import './foo.js'
 
 export default function () {
-	console.log(foo);
+  console.log(2)
 }

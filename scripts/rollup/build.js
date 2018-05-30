@@ -1,4 +1,5 @@
 import babel from 'rollup-plugin-babel'
+import eslint from 'rollup-plugin-eslint'
 import { uglify } from 'rollup-plugin-uglify'
 import { minify } from 'uglify-es'
 import resolve from 'rollup-plugin-node-resolve';
@@ -8,13 +9,13 @@ export default {
 	input: 'src/main.js',
 	output: [
 		{
-			file: 'dist/main.esm.js',
+			file: 'dist/zhuanti.esm.js',
 			format: 'es'
 		},
 		{
-			file: `dist/main.iife.js`,
+			file: `dist/zhuanti.iife.js`,
 			format: 'iife',
-			name: 'freshesBridge'
+			name: 'zhuanti'
 		}
 	],
 	plugins: [
@@ -24,11 +25,12 @@ export default {
       browser: true,
     }),
     commonjs(),
+    eslint(),
 		babel({
 			plugins: [
 				'external-helpers'
-			]
-		}),
+      ]
+    }),
 		uglify({}, minify)
 	],
 	external: []

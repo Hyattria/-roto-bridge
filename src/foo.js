@@ -1,2 +1,2 @@
-// src/foo.js
-export default 'hello world!';
+// // src/foo.js
+// console.log(1)

@@ -1,5 +1,5 @@
 {
-  "name": "zhuanti-module-new",
+  "name": "zhuanti-module",
   "version": "1.0.0",
   "description": "Some project with Vue2 and HumanUI",
   "author": "夏添 <xiatian@suiyi.com.cn>",
@@ -7,16 +7,17 @@
   "scripts": {
     "start": "node ./scripts/development.js",
     "dev": "node ./scripts/development.js",
-    "build": "node ./scripts/production.js",
+    "build": "rollup -c ./scripts/rollup/build.js ",
     "git": "git init && git add . && git commit -m 'init project'",
     "first": "yarn install && yarn run git"
   },
   "dependencies": {
-    "vue-human": "^2.8.2",
     "@freshservice/bridge": "^1.3.4",
+    "axios": "^0.18.0",
     "debug": "^3.1.0",
     "rollup-plugin-json": "^3.0.0",
-    "the-answer": "^1.0.0"
+    "the-answer": "^1.0.0",
+    "vue-human": "^2.8.2"
   },
   "devDependencies": {
     "@freshes/house": "^1.2.0",
@@ -29,6 +30,7 @@
     "jquery": "^3.3.1",
     "rollup-plugin-babel": "^3.0.4",
     "rollup-plugin-commonjs": "^9.1.3",
+    "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "^4.0.0",
     "uglify-es": "^3.3.4"
