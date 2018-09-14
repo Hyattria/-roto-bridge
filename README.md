@@ -1,14 +1,7 @@
-# roll-template
+# @roto/bridge
 
 one Object to rollup
 
-## Development
-
-``` bash
-# install dependencies
-yarn install
-
-```
 ## Production
 
 ``` bash
