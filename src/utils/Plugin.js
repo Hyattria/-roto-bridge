@@ -45,6 +45,13 @@ export default class Plugin {
   }
 
   /**
+   * 判断是否在支付宝环境
+   */
+  isAliPay () {
+    return navigator.userAgent.indexOf('AlipayClient') > -1
+  }
+
+  /**
    * 判断是否是食行APP
    * @return {Boolean}
    */

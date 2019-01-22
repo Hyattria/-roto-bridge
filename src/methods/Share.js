@@ -12,6 +12,7 @@ export default class Share extends Action {
     this.shareData = otpions
     // this.isForbidden = isForbidden
     this.cb = cb || function () {}
+    this.my = ''
   }
 
   execute (from) {
@@ -22,6 +23,9 @@ export default class Share extends Action {
       }
       console.log('wx share init')
       return this.onWxConfig()
+    } else if (this.isAliPay()) {
+      this.addAliPayScript()
+      console.log('ali share init')
     } else if (from === 'app') {
       const data = {
         title: this.shareData.title,
@@ -123,25 +127,51 @@ export default class Share extends Action {
     })
   }
 
-  miniProgramShareInfo (share) {
-    wx.miniProgram.getEnv(res => {
-      if (res.miniProgram) {
-        wx.miniProgram.postMessage({
-          data: { share }
+  addAliPayScript () {
+    const script = document.createElement('script')
+    script.src = 'https://appx/web-view.min.js'
+    script.onload = () => {
+      this.my = window.my
+      this.setMiniProgramShare('ali')
+    }
+    document.body.appendChild(script)
+  }
+
+  miniProgramShareInfo (share, module = 'wx') {
+    switch (module) {
+      case 'wx':
+        wx.miniProgram.getEnv(res => {
+          if (res.miniprogram || res.miniProgram) {
+            wx.miniProgram.postMessage({
+              data: { share }
+            })
+          }
         })
-      }
-    })
+        break
+      case 'ali':
+        this.my.getEnv(res => {
+          if (res.miniprogram || res.miniProgram) {
+            this.my.postMessage({
+              type: 'share',
+              value: Object.assign(share, {
+                bgImgUrl: this.shareData.miniImg
+              })
+            })
+          }
+        })
+        break
+    }
   }
 
   clearMiniProgramShare () {
     this.miniProgramShareInfo({ title: null }) // 清空分享信息
   }
 
-  setMiniProgramShare () {
+  setMiniProgramShare (module) {
     this.miniProgramShareInfo({
       title: this.shareData.title, // 分享title
-      imageUrl: this.shareData.bannerImg, // 分享主图
+      imageUrl: this.shareData.miniImg, // 分享主图
       path: window.location.origin + window.location.pathname + window.location.hash // 分享链接
-    })
+    }, module)
   }
 }

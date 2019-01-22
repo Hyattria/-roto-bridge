@@ -16,9 +16,10 @@ export default class Link extends Plugin {
    */
   constructor (options) {
     super(options)
+    this.$baseUrl = options.baseUrl ? options.baseUrl : `https://wechatz.34580.com/mart/#`
     this.baseNativeUrl = 'https://wechat.34580.com'
     this.nativeUrl = ''
-    this.baseWechatUrl = options && options.test ? 'https://wechaty.34580.com/mart/#' : 'https://wechatx.34580.com/mart/#'
+    this.baseWechatUrl = options && options.test ? this.$baseUrl : 'https://wechatx.34580.com/mart/#'
     this.wechatUrl = ''
     this.nativeName = ''
   }

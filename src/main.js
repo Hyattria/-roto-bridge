@@ -8,6 +8,7 @@ import GetCartCounts from './methods/GetCartCounts'
 import Address from './methods/Address'
 import OrderDetail from './methods/OrderDetail'
 import City from './methods/City'
+import device from './utils/device'
 
 export {
   OnInitApp,
@@ -18,5 +19,6 @@ export {
   GetCartCounts,
   Address,
   OrderDetail,
-  City
+  City,
+  device
 }
